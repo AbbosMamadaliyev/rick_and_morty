@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rick_and_morty/presentation/location_body/location_body_model.dart';
-import 'package:rick_and_morty/presentation/navigation/main_navigation.dart';
 
 class LocationBodyWidget extends StatefulWidget {
   const LocationBodyWidget({Key? key}) : super(key: key);
@@ -36,10 +35,7 @@ class _LocationBodyWidgetState extends State<LocationBodyWidget> {
                 final location = locations[index];
 
                 return GestureDetector(
-                  onTap: () {
-                    Navigator.of(context)
-                        .pushNamed(MainNavigationRouteNames.locationDetails);
-                  },
+                  onTap: () {},
                   child: Container(
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(

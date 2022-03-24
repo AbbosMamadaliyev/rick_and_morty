@@ -25,7 +25,6 @@ class _LocationDetailsPageState extends State<LocationDetailsPage> {
         iconTheme: IconThemeData(color: Colors.black),
       ),
       body: ListView(
-        // crossAxisAlignment: CrossAxisAlignment.start,
         shrinkWrap: true,
         children: [
           Container(
