@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:rick_and_morty/presentation/episode_body/episode_body_model.dart';
-import 'package:rick_and_morty/presentation/navigation/main_navigation.dart';
 
 import '../../data/models/character_model.dart';
 
@@ -23,21 +22,21 @@ class _EpisodeBodyWidgetState extends State<EpisodeBodyWidget> {
     final url = Uri.parse(_baseUrl);
     final response = await http.get(url);
     Map<String, dynamic> map = jsonDecode(response.body);
-    print((map['results'] as List)
-        .map((e) => print((e['characters'] as List).map((e) {
-              setState(() {
-                link = e;
-              });
-            }))));
+    (map['results'] as List).map((e) => (e['characters'] as List).map((e) {
+          setState(() {
+            link = e;
+            print(e);
+          });
+        }));
     final result = Character.fromMap(map);
-    print(link);
+    // print(link);
     return result;
   }
 
   @override
   void initState() {
-    charactersInEpisode();
-    print('hello');
+    // charactersInEpisode();
+    // print('hello');
     super.initState();
   }
 
@@ -69,18 +68,7 @@ class _EpisodeBodyWidgetState extends State<EpisodeBodyWidget> {
                       final episode = episodes[index];
 
                       return InkWell(
-                        onTap: () {
-                          context
-                              .read<EpisodeBodyModel>()
-                              .charactersOnEpisode(episode.characters, index);
-
-                          Navigator.of(context).pushNamed(
-                            MainNavigationRouteNames.episodeDetails,
-                            arguments: {
-                              'episode': episode,
-                            },
-                          );
-                        },
+                        onTap: () {},
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -113,11 +101,6 @@ class _EpisodeBodyWidgetState extends State<EpisodeBodyWidget> {
                                 ),
                               ],
                             ),
-                            Icon(
-                              Icons.arrow_forward_ios,
-                              color: Colors.grey.shade500,
-                              size: 18,
-                            )
                           ],
                         ),
                       );

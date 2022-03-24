@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:rick_and_morty/data/models/character_model.dart';
 import 'package:rick_and_morty/data/models/episode_model.dart';
+import 'package:rick_and_morty/data/models/location_model.dart';
 
 class ApiClient {
   final String _baseUrl = 'https://rickandmortyapi.com/api';
@@ -19,6 +20,7 @@ class ApiClient {
     final url = Uri.parse(uri);
     final response = await http.get(url);
     Map<String, dynamic> map = jsonDecode(response.body);
+    print(response.body);
     final result = Character.fromMap(map);
     return result;
   }
@@ -28,6 +30,14 @@ class ApiClient {
     final response = await http.get(url);
     Map<String, dynamic> map = jsonDecode(response.body);
     final result = EpisodeModel.fromMap(map);
+    return result;
+  }
+
+  Future<LocationModel> getLocations(int page) async {
+    final url = Uri.parse('$_baseUrl/location/?page=$page');
+    final response = await http.get(url);
+    Map<String, dynamic> map = jsonDecode(response.body);
+    final result = LocationModel.fromMap(map);
     return result;
   }
 }

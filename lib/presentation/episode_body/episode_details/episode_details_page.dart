@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rick_and_morty/data/models/episode_model.dart';
 
-import '../../navigation/main_navigation.dart';
 import '../episode_body_model.dart';
 
 class EpisodeDetailsPage extends StatefulWidget {
@@ -16,8 +15,6 @@ class _EpisodeDetailsPageState extends State<EpisodeDetailsPage> {
   @override
   Widget build(BuildContext context) {
     final model = context.watch<EpisodeBodyModel>();
-    final charactersM = model.characters;
-    print(model.characters.length);
     final args =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     final episode = args['episode'] as Episode;
@@ -94,9 +91,11 @@ class _EpisodeDetailsPageState extends State<EpisodeDetailsPage> {
                         ),
                         itemCount: episode.characters.length,
                         itemBuilder: (context, index) {
-                          final character = charactersM[index];
+                          // final character = charactersM[index];
+                          final character = episode.characters[index];
 
-                          return GestureDetector(
+                          return Text(model.characters[index].name)
+                              /*GestureDetector(
                             onTap: () {
                               Navigator.of(context).pushNamed(
                                   MainNavigationRouteNames.characterDetails,
@@ -151,7 +150,8 @@ class _EpisodeDetailsPageState extends State<EpisodeDetailsPage> {
                                 ],
                               ),
                             ),
-                          );
+                          )*/
+                              ;
                         })
               ],
             ),

@@ -15,6 +15,7 @@ class EpisodeBodyModel extends ChangeNotifier {
   get isLoadInProgress => _isLoadInProgress;
 
   List<Episode> get episodes => _episodes;
+
   List<Character> get characters => _characters;
 
   void getEpisodes() async {
@@ -28,7 +29,7 @@ class EpisodeBodyModel extends ChangeNotifier {
     await _loadNextPage();
   }
 
-  void charactersOnEpisode(List urlList, int index) async {
+  /* void charactersOnEpisode(List urlList, int index) async {
     _isLoadInProgress = true;
     print('list: ${urlList.length}');
     // if (index < urlList.length) return;
@@ -39,6 +40,30 @@ class EpisodeBodyModel extends ChangeNotifier {
       _isLoadInProgress = false;
       notifyListeners();
     });
+  }*/
+
+  void charactersOnEpisode(List uri) async {
+    print('urls: ${uri}');
+    _isLoadInProgress = true;
+
+    await _apiClient.charactersInEpisode(uri[0]).then((value) {
+      _characters.add(value);
+      _isLoadInProgress = false;
+      notifyListeners();
+    });
+
+    /*uri.map((e) async {
+      print('url: $e');
+      await _apiClient.charactersInEpisode(e).then((value) {
+        _characters.add(value);
+        _isLoadInProgress = false;
+        notifyListeners();
+      });
+    });*/
+    /* for (int i = 0; i < length; i++) {
+      print('i: $i');
+
+    }*/
   }
 
   Future<void> _loadNextPage() async {

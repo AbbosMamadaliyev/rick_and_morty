@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rick_and_morty/presentation/character_body/character_body_model.dart';
 import 'package:rick_and_morty/presentation/episode_body/episode_body_model.dart';
+import 'package:rick_and_morty/presentation/location_body/location_body_model.dart';
 import 'package:rick_and_morty/presentation/main_screen/main_screen.dart';
 import 'package:rick_and_morty/presentation/main_screen/main_screen_model.dart';
 import 'package:rick_and_morty/presentation/navigation/main_navigation.dart';
@@ -28,6 +29,9 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(
               create: (BuildContext context) =>
                   EpisodeBodyModel()..getEpisodes()),
+          ChangeNotifierProvider(
+              create: (BuildContext context) =>
+                  LocationBodyModel()..getAllLocations()),
         ],
         child: const MainScreen(),
       ),

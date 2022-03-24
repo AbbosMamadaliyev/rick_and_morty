@@ -15,11 +15,11 @@ class EpisodeDetailsPageModel extends ChangeNotifier {
   void charactersOnEpisode(List uri) async {
     _isLoadInProgress = true;
     // notifyListeners();
-    await _apiClient.charactersInEpisode('uri').then((value) {
-      _characters.add(value);
-      _isLoadInProgress = false;
-      notifyListeners();
-    });
+    uri.map((e) async => await _apiClient.charactersInEpisode(e).then((value) {
+          _characters.add(value);
+          _isLoadInProgress = false;
+          notifyListeners();
+        }));
     /* for (int i = 0; i < length; i++) {
       print('i: $i');
 
