@@ -69,3 +69,5 @@ class _LocationBodyWidgetState extends State<LocationBodyWidget> {
     );
   }
 }
+
+// flutter bloc
